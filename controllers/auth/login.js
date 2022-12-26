@@ -19,7 +19,7 @@ const loginUser = async (req, res) => {
 
   res.status(200).json({
     status: 'success',
-    cose: 200,
+    code: 200,
     data: {
       user: {
         email: user.email,

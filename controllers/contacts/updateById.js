@@ -2,7 +2,6 @@ const { NotFound } = require('http-errors');
 const { Contact } = require('../../models');
 const { isValidId } = require('../../middlewares');
 
-
 const updateById = async (req, res, next) => {
   const { contactId } = req.params;
 
@@ -18,7 +17,7 @@ const updateById = async (req, res, next) => {
 
   res.json({
     status: 'success',
-    cose: 200,
+    code: 200,
     data: {
       updatedContact,
     },

@@ -1,5 +1,16 @@
-const { User } = require('../../models');
+const getCurrentUser = (req, res) => {
+  const { email, subscription } = req.user;
 
-const getCurrentUser = (req, res) => {};
+  res.status(200).json({
+    status: 'success',
+    code: 200,
+    data: {
+      user: {
+        email,
+        subscription,
+      },
+    },
+  });
+};
 
 module.exports = getCurrentUser;

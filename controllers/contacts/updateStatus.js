@@ -17,7 +17,7 @@ const updateStatusById = async (req, res, next) => {
 
   res.json({
     status: 'success',
-    cose: 200,
+    code: 200,
     data: {
       updatedContact,
     },
