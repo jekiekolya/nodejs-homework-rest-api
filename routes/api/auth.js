@@ -3,8 +3,12 @@ const router = express.Router();
 
 const { validation, ctrlWrapper } = require('../../middlewares');
 const { userSchema } = require('../../schemas');
-const { users } = require('../../controllers');
+const { auth: ctrl } = require('../../controllers');
 
-router.post('/', validation(userSchema), ctrlWrapper(users.registerUser));
+router.post(
+  '/register',
+  validation(userSchema.registerUserSchema),
+  ctrlWrapper(ctrl.register)
+);
 
 module.exports = router;
