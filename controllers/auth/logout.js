@@ -1,17 +1,12 @@
 const { User } = require('../../models');
 
 const logoutUser = async (req, res) => {
-  // NOTE: Here logout implement on clint side because JWT state
-  // less and does not have method for deactivate token.
-  // NOTE: For deactivate token you can use JWT-REDIS library.
+  // NOTE: For deactivate token we can use JWT-REDIS library.
+  const { _id } = req.user;
 
-  await User.findOneAndUpdate({ _id: req.user._id }, { token: '' });
+  await User.findByIdAndUpdate(_id, { token: null });
 
-  res.status(204).json({
-    status: 'success',
-    code: 204,
-    message: 'User successfully logout',
-  });
+  res.status(204).json();
 };
 
 module.exports = logoutUser;
