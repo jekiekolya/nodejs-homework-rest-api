@@ -9,8 +9,8 @@ project were used Data Base [MongoDB](https://account.mongodb.com/). For public
 access to the server (hosting) was used the service -
 [Render](https://render.com/).
 
-:heart_hands::astronaut::sunglasses::upside_down_face: You can use all HTTP
-requests in the public workplace by POSTMAN -
+:sunglasses::rocket: You can use all HTTP requests in the public workplace by
+POSTMAN -
 [REST API by Jekiekolya](https://elements.getpostman.com/redirect?entityId=23575916-a3bcd6b0-da4f-402c-8841-fdc3650c4ad2&entityType=collection)
 
 # How work with this REST API?
