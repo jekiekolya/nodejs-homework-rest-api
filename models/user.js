@@ -1,6 +1,8 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcryptjs');
 
+const { handleMongooseError } = require('../helpers');
+
 const userSchema = Schema(
   {
     email: {
@@ -31,6 +33,8 @@ const userSchema = Schema(
     timestamps: true,
   }
 );
+// Handle validation errors
+userSchema.post('save', handleMongooseError);
 
 // Method for hashing password
 userSchema.methods.setPassword = function setPassword(password) {
