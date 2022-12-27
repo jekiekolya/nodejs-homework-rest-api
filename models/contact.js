@@ -1,5 +1,7 @@
 const { Schema, model, SchemaTypes } = require('mongoose');
 
+const { handleMongooseError } = require('../helpers');
+
 const contactSchema = Schema(
   {
     name: {
@@ -23,7 +25,7 @@ const contactSchema = Schema(
       default: false,
     },
     owner: {
-      // NOTE: POPULATE take ID from TYPE field, then take Obj with this ID in USERS collection
+      // NOTE: Method POPULATE take ID from TYPE field, then take Obj with this ID in USERS collection
       type: SchemaTypes.ObjectId,
       ref: 'user',
       require: true,
@@ -34,6 +36,8 @@ const contactSchema = Schema(
     timestamps: true,
   }
 );
+// Handle validation errors
+contactSchema.post('save', handleMongooseError);
 
 const Contact = model('contact', contactSchema);
 
