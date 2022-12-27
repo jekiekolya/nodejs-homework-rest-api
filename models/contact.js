@@ -23,8 +23,10 @@ const contactSchema = Schema(
       default: false,
     },
     owner: {
+      // NOTE: POPULATE take ID from TYPE field, then take Obj with this ID in USERS collection
       type: SchemaTypes.ObjectId,
       ref: 'user',
+      require: true,
     },
   },
   {

@@ -7,7 +7,9 @@ const getById = async (req, res, next) => {
 
   isValidId(req, res, next);
 
-  const contact = await Contact.findById(contactId);
+  const contact = await Contact.findOne({
+    $and: [{ _id: contactId }, { owner: req.user._id }],
+  }).populate('owner', '_id email subscription');
 
   if (!contact) {
     throw new NotFound(`Contact with id=${contactId} not found`);
