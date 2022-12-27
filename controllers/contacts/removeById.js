@@ -6,7 +6,9 @@ const removeById = async (req, res, next) => {
   const { contactId } = req.params;
   isValidId(req, res, next);
 
-  const deletedId = await Contact.findByIdAndRemove(contactId);
+  const deletedId = await Contact.findOneAndRemove({
+    $and: [{ _id: contactId }, { owner: req.user._id }],
+  });
   if (!deletedId) {
     throw new NotFound(`Contact with id=${contactId} not found`);
   }
