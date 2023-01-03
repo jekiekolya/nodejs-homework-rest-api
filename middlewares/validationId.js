@@ -7,6 +7,7 @@ const isValidId = (req, _, next) => {
     error.status = 400;
     next(error);
   }
+  next();
 };
 
 module.exports = isValidId;
