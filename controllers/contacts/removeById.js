@@ -1,10 +1,8 @@
 const { NotFound } = require('http-errors');
 const { Contact } = require('../../models');
-const { isValidId } = require('../../middlewares');
 
 const removeById = async (req, res, next) => {
   const { contactId } = req.params;
-  isValidId(req, res, next);
 
   const deletedId = await Contact.findOneAndRemove({
     $and: [{ _id: contactId }, { owner: req.user._id }],

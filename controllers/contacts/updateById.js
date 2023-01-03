@@ -1,10 +1,8 @@
 const { NotFound } = require('http-errors');
 const { Contact } = require('../../models');
-const { isValidId } = require('../../middlewares');
 
 const updateById = async (req, res, next) => {
   const { contactId } = req.params;
-  isValidId(req, res, next);
 
   const updatedContact = await Contact.findOneAndUpdate(
     {
