@@ -1,17 +1,13 @@
 const { User } = require('../../models');
-const path = require('path');
 const fs = require('fs/promises');
 const jimp = require('jimp');
-
-const avatarsDir = path.join(__dirname, '../../', 'public', 'avatars');
+const { uploadFileToCloudinary } = require('../../helpers');
 
 const updateAvatar = async (req, res) => {
-  const { path: tempUpload, originalname } = req.file;
-  const { _id: id } = req.user;
-  const imageName = `${id}_${originalname}`;
+  const { path: tempUpload } = req.file;
 
   try {
-    // change file size
+    // change file size (with the help of jimp)
     const img = await jimp.read(req.file.path);
     await img
       .autocrop()
@@ -22,11 +18,12 @@ const updateAvatar = async (req, res) => {
       )
       .writeAsync(req.file.path);
 
-    // replace file
-    const resultUpload = path.join(avatarsDir, imageName);
-    await fs.rename(tempUpload, resultUpload);
-    const avatarURL = path.join('avatars', imageName);
-    await User.findByIdAndUpdate(req.user._id, { avatarURL });
+    // Upload file to cloud service
+    const { secure_url: avatarURL, public_id: idCloudAvatar } =
+      await uploadFileToCloudinary(tempUpload, req.user.idCloudAvatar);
+    await fs.unlink(tempUpload);
+
+    await User.findByIdAndUpdate(req.user._id, { avatarURL, idCloudAvatar });
 
     res.json({
       status: 'success',
