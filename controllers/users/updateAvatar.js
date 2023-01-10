@@ -1,9 +1,14 @@
 const { User } = require('../../models');
 const fs = require('fs/promises');
 const jimp = require('jimp');
+const { BadRequest } = require('http-errors');
 const { uploadFileToCloudinary } = require('../../helpers');
 
 const updateAvatar = async (req, res) => {
+  if (!req.file) {
+    throw new BadRequest('Avatar not attach');
+  }
+
   const { path: tempUpload } = req.file;
 
   try {
