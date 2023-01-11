@@ -6,8 +6,9 @@ const { User } = require('../../models');
 const loginUser = async (req, res) => {
   const { SECRET_KEY } = process.env;
   const { email, password } = req.body;
+  console.log(email, password, '--------------------------------------');
   const user = await User.findOne({ email });
-
+  console.log('user was found --------------------------');
   // Checking if user appearing
   if (!user || !user.comparePassword(password)) {
     throw new Unauthorized('Email or password is wrong');
