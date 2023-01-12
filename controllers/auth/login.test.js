@@ -39,8 +39,8 @@ describe('test login controllers', () => {
 
   test('status code', async () => {
     const requestBody = {
-      email: 'bogdan1@gmail.com',
-      password: '123456',
+      email: 'exampleForTest@test.com',
+      password: '12345678',
     };
     loginResponse = await request(app)
       .get('/api/auth/login')
