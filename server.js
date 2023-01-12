@@ -2,6 +2,7 @@ const app = require('./app');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 
+// disables strict query behavior
 mongoose.set('strictQuery', false);
 dotenv.config();
 
