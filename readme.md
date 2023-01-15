@@ -45,6 +45,7 @@ https://phonebook-mongodb.onrender.com
   data: {
     user: {
       email: 'example@example.com',
+      avatarURL: '//www.gravatar.com/avatar/23463b99b62a72f26ed677cc556c44e8',
       subscription: 'starter',
     },
   },
@@ -74,9 +75,10 @@ https://phonebook-mongodb.onrender.com
     user: {
       email: 'example@example.com',
       subscription: 'starter',
+      avatarURL: '//www.gravatar.com/avatar/23463b99b62a72f26ed677cc556c44e8',
     },
     token:
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYWI1MWY5MDU2MGY0Y2MyMWViZGYxOCIsImlhdCI6MTY3MjE3MjMwMCwiZXhwIjoxNjcyMTc1OTAwfQ.tdyqNfPfS_qa9ND8jkByf6WJp8ygLe21aykIig-MiZ0',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYzNlZDdhZDgwN2JjMjgzOTk4Y2UyYyIsImlhdCI6MTY3Mzc4NDc2MiwiZXhwIjoxNjczNzg4MzYyfQ.gkvHFaL3a8pKOa-Z0zooHoJuRAKFONj7feaiEzaS4Co',
   },
 };
 ```
@@ -145,6 +147,35 @@ https://phonebook-mongodb.onrender.com
   },
 };
 ```
+
+### Update avatar for user
+
+**Method -** `PATCH`\
+**Path -** `/api/users/avatars`\
+**Headers -** `Authorization: Bearer {Token}`\
+**Example body:**
+
+```javascript
+Form-data
+{
+    "avatar": SELECTED-FILE
+}
+```
+
+**Example answer:**
+
+```javascript
+{
+  status: 'success',
+  code: 200,
+  data: {
+    avatarURL:
+      'https://res.cloudinary.com/dpvkleqce/image/upload/v1673785351/avatars_phonebook/jdiqgiz8wlagptuqlekr.jpg',
+  },
+};
+```
+
+For saving avatars, was used **Cloudinary.com**
 
 ## Contacts requests
 
