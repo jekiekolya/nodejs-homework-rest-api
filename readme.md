@@ -153,10 +153,9 @@ https://phonebook-mongodb.onrender.com
 **Method -** `PATCH`\
 **Path -** `/api/users/avatars`\
 **Headers -** `Authorization: Bearer {Token}`\
-**Example body:**
+**Example body (Form-data):**
 
 ```javascript
-Form-data
 {
     "avatar": SELECTED-FILE
 }
