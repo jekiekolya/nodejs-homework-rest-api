@@ -13,6 +13,10 @@ const loginUser = async (req, res) => {
     throw new Unauthorized('Email or password is wrong');
   }
 
+  if (!user.verify) {
+    throw new Unauthorized('Email is not verified');
+  }
+
   // Creating token
   const payload = { id: user._id };
   const token = jwt.sign(payload, SECRET_KEY, { expiresIn: '1h' });

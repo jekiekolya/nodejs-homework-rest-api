@@ -21,4 +21,11 @@ router.patch(
   ctrlWrapper(ctrl.updateAvatar)
 );
 
+// Verify user email
+router.post(
+  '/verify',
+  validation(userSchema.verifyUserEmailSchema),
+  ctrlWrapper(ctrl.resendVerifyUserEmail)
+);
+
 module.exports = router;

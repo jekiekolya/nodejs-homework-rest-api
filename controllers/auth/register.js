@@ -1,7 +1,9 @@
 const { Conflict } = require('http-errors');
 const gravatar = require('gravatar');
+const uniqid = require('uniqid');
 
 const { User } = require('../../models');
+const { sendEmail } = require('../../helpers');
 
 const register = async (req, res) => {
   const { email, password } = req.body;
@@ -15,11 +17,23 @@ const register = async (req, res) => {
   // Get avatar URL
   const avatarURL = gravatar.url(email);
 
+  // Create verificationToken user
+  const verificationToken = uniqid();
+
   // Creating new user with hashed password
-  const newUser = new User({ email, avatarURL });
+  const newUser = new User({ email, avatarURL, verificationToken });
   newUser.setPassword(password);
 
   const createdUser = await newUser.save();
+
+  // Send email for verification
+  const mail = {
+    to: email,
+    subject: 'Verification email',
+    text: `Please, confirm your email: http://localhost:3000/api/users/verify/${verificationToken}`,
+    html: `<p>Please, <a target="_blank" href="http://localhost:3000/api/users/verify/${verificationToken}">confirm</a> your email</p>`,
+  };
+  await sendEmail(mail);
 
   res.status(201).json({
     status: 'success',
@@ -29,6 +43,7 @@ const register = async (req, res) => {
         email,
         avatarURL,
         subscription: createdUser.subscription,
+        verificationToken,
       },
     },
   });

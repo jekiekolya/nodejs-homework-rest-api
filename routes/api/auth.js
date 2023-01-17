@@ -19,4 +19,7 @@ router.get(
 
 router.post('/logout', auth, ctrlWrapper(ctrl.logout));
 
+// Verification user
+router.get('/verify/:verificationToken', ctrlWrapper(ctrl.verifyEmail));
+
 module.exports = router;

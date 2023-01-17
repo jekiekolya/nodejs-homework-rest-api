@@ -72,8 +72,24 @@ const updateUserSubscriptionSchema = Joi.object({
     'any.required': `missing field {{#label}}`,
   });
 
+// Schema for resent verify email
+const verifyUserEmailSchema = Joi.object({
+  email: Joi.string().trim().email().required().messages({
+    'string.base': `{{#label}} should be a type of string`,
+    'string.empty': `{{#label}} must contain value`,
+    'string.email':
+      '{{#label}} must be contain symbol @ and look like "jekie@gmail.com"',
+    'any.required': `{{#label}} is a required field`,
+  }),
+})
+  .required()
+  .messages({
+    'any.required': `missing fields`,
+  });
+
 module.exports = {
   registerUserSchema,
   loginUserSchema,
   updateUserSubscriptionSchema,
+  verifyUserEmailSchema,
 };
