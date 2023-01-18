@@ -47,10 +47,55 @@ https://phonebook-mongodb.onrender.com
       email: 'example@example.com',
       avatarURL: '//www.gravatar.com/avatar/23463b99b62a72f26ed677cc556c44e8',
       subscription: 'starter',
+      verificationToken: '1k4dz29ld1ralye',
     },
   },
 };
 ```
+
+### Verification user email
+
+**Method -** `GET`\
+**Path -** `/api/auth/verify/{verificationToken}`\
+
+**Example answer:**
+
+```javascript
+{
+  status: 'success',
+  code: 201,
+  data: {
+      message: 'Verification successful',
+  },
+};
+```
+
+### Update verification user email (Use it for resent letter with verification user email)
+
+**Method -** `POST`\
+**Path -** `/api/users/verify`\
+**Example body:**
+
+```javascript
+{
+    "email": "example@example.com",
+}
+```
+
+**Example answer:**
+
+````javascript
+{
+  status: 'success',
+  code: 200,
+  data: {
+    user: {
+      email: 'example@example.com',
+      verificationToken: '1k4dz29ld1ralye',
+    },
+    message: "A verification letter was sent to the email - example@example.com",
+  },
+};
 
 ### Login user
 
@@ -63,7 +108,7 @@ https://phonebook-mongodb.onrender.com
     "email": "example@example.com",
     "password": "123456"
 }
-```
+````
 
 **Example answer:**
 
