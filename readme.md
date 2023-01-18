@@ -99,7 +99,7 @@ https://phonebook-mongodb.onrender.com
 
 ### Login user
 
-**Method -** `GET`\
+**Method -** `POST`\
 **Path -** `/api/auth/login`\
 **Example body:**
 
