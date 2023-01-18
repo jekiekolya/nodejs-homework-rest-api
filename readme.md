@@ -11,7 +11,7 @@ access to the server (hosting) was used the service -
 
 :sunglasses::rocket: You can use all HTTP requests in the public workplace by
 POSTMAN -
-[REST API by Jekiekolya](https://elements.getpostman.com/redirect?entityId=23575916-a3bcd6b0-da4f-402c-8841-fdc3650c4ad2&entityType=collection)
+[REST API by Jekiekolya](https://www.postman.com/winter-firefly-414317/workspace/rest-api-by-jekiekolya/collection/23575916-dbf7edac-7ee9-4f8c-9a3f-455621620422?action=share&creator=23575916)
 
 # How work with this REST API?
 
