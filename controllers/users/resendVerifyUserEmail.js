@@ -1,5 +1,4 @@
-const { Conflict } = require('http-errors');
-const gravatar = require('gravatar');
+const { NotFound, Conflict } = require('http-errors');
 const uniqid = require('uniqid');
 
 require('dotenv').config();
@@ -8,26 +7,28 @@ const { BASE_URL } = process.env;
 const { User } = require('../../models');
 const { sendEmail } = require('../../helpers');
 
-const register = async (req, res) => {
-  const { email, password } = req.body;
-  const user = await User.findOne({ email });
-
-  // Checking if user already exist
-  if (user) {
-    throw new Conflict(`User with email - ${email}, already exist`);
-  }
-
-  // Get avatar URL
-  const avatarURL = gravatar.url(email);
-
+const resendVerifyUserEmail = async (req, res) => {
+  const { email } = req.body;
   // Create verificationToken user
   const verificationToken = uniqid();
+  const user = await User.findOneAndUpdate(
+    req.body,
+    { verificationToken },
+    {
+      new: true,
+      runValidators: true,
+    }
+  );
 
-  // Creating new user with hashed password
-  const newUser = new User({ email, avatarURL, verificationToken });
-  newUser.setPassword(password);
+  // Checking if user appear
+  if (!user) {
+    throw new NotFound(`User with ${email} not found`);
+  }
 
-  const createdUser = await newUser.save();
+  // Checking if user already exist
+  if (user.verify) {
+    throw new Conflict(`User with email - ${email}, already verified`);
+  }
 
   // Send email for verification
   const mail = {
@@ -38,18 +39,17 @@ const register = async (req, res) => {
   };
   await sendEmail(mail);
 
-  res.status(201).json({
+  res.status(200).json({
     status: 'success',
-    code: 201,
+    code: 200,
     data: {
       user: {
         email,
-        avatarURL,
-        subscription: createdUser.subscription,
         verificationToken,
       },
+      message: `A verification letter was sent to the email - ${email}`,
     },
   });
 };
 
-module.exports = register;
+module.exports = resendVerifyUserEmail;
