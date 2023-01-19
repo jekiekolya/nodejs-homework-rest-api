@@ -9,8 +9,9 @@ project were used Data Base [MongoDB](https://account.mongodb.com/). For public
 access to the server (hosting) was used the service -
 [Render](https://render.com/).
 
-:sunglasses::rocket: You can use all HTTP requests in the public workplace by
-POSTMAN -
+:sunglasses::rocket: You can use all HTTP requests in
+[Swagger](https://swagger-phonebook-by-jekiekolya.onrender.com/docs/#/) or the
+public workplace by POSTMAN -
 [REST API by Jekiekolya](https://www.postman.com/winter-firefly-414317/workspace/rest-api-by-jekiekolya/collection/23575916-dbf7edac-7ee9-4f8c-9a3f-455621620422?action=share&creator=23575916)
 
 # How work with this REST API?
